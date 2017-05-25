@@ -1,18 +1,18 @@
 object frmMain: TfrmMain
-  Left = 296
-  Height = 240
-  Top = 147
+  Left = 1803
+  Height = 284
+  Top = 394
   Width = 648
   Caption = 'CPU Identification'
-  ClientHeight = 240
+  ClientHeight = 284
   ClientWidth = 648
   OnCreate = FormCreate
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.6.2.0'
   object labelVendor: TLabel
     Left = 58
     Height = 17
     Top = 36
-    Width = 54
+    Width = 53
     Caption = 'Vendor:'
     ParentColor = False
   end
@@ -20,7 +20,7 @@ object frmMain: TfrmMain
     Left = 144
     Height = 17
     Top = 36
-    Width = 89
+    Width = 87
     Caption = 'vendorName'
     ParentColor = False
   end
@@ -28,7 +28,7 @@ object frmMain: TfrmMain
     Left = 58
     Height = 17
     Top = 16
-    Width = 47
+    Width = 46
     Caption = 'CPUID:'
     ParentColor = False
   end
@@ -36,7 +36,7 @@ object frmMain: TfrmMain
     Left = 144
     Height = 17
     Top = 16
-    Width = 102
+    Width = 100
     Caption = 'CPUID Support'
     ParentColor = False
   end
@@ -92,7 +92,7 @@ object frmMain: TfrmMain
     Left = 58
     Height = 17
     Top = 116
-    Width = 66
+    Width = 64
     Caption = 'Stepping:'
     ParentColor = False
   end
@@ -100,8 +100,26 @@ object frmMain: TfrmMain
     Left = 144
     Height = 17
     Top = 116
-    Width = 163
+    Width = 161
     Caption = 'labelProcessorStepping'
     ParentColor = False
+  end
+  object labelFeatures: TLabel
+    Left = 58
+    Height = 17
+    Top = 136
+    Width = 63
+    Caption = 'Features:'
+    ParentColor = False
+  end
+  object labelProcessorFeatures: TLabel
+    Left = 144
+    Height = 136
+    Top = 136
+    Width = 471
+    AutoSize = False
+    Caption = 'labelProcessorFeatures'
+    ParentColor = False
+    WordWrap = True
   end
 end

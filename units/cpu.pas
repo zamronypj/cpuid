@@ -303,13 +303,6 @@ begin
   result := basicInfo.VendorIdStr;
 end;
 
-function TCpu.hasFeature(const feature: string): boolean;
-begin
-
-  result := false;
-
-end;
-
 const
    CPUID_VERSION_EXTFAMILY_BIT   = $f00000;
    CPUID_VERSION_EXTMODEL_BIT    = $0f0000;
@@ -352,6 +345,80 @@ var res:TCPUIDResult;
 begin
   res := cpuidExec(CPUID_OPR_VERSION_FEATURE_INFO);
   result := res.eax and CPUID_VERSION_STEPPING_BIT;
+end;
+
+function TCpu.hasFeature(const feature: string): boolean;
+var res:TCPUIDResult;
+begin
+  result := false;
+  res := cpuidExec(CPUID_OPR_VERSION_FEATURE_INFO);
+  case feature of
+     'SSE3'          : result := ((res.ecx and $1) = $1);
+     'PCLMULQDQ'    : result := ((res.ecx and $2) = $2);
+     'DTES64'       : result := ((res.ecx and $4) = $4);
+     'MONITOR'      : result := ((res.ecx and $8) = $8);
+     'DS-CPL'       : result := ((res.ecx and $10) = $10);
+     'VMX'          : result := ((res.ecx and $20) = $20);
+     'SMX'          : result := ((res.ecx and $40) = $40);
+     'EIST'         : result := ((res.ecx and $80) = $80);
+     'TM2'          : result := ((res.ecx and $100) = $100);
+     'SSSE3'         : result := ((res.ecx and $200) = $200);
+     'CNXT-ID'      : result := ((res.ecx and $400) = $400);
+     'SDBG'         : result := ((res.ecx and $800) = $800);
+     'FMA'          : result := ((res.ecx and $1000) = $1000);
+     'CMPXCHG16B'   : result := ((res.ecx and $2000) = $2000);
+     'xTPR'         : result := ((res.ecx and $4000) = $4000);
+     'PDCM'         : result := ((res.ecx and $8000) = $8000);
+     //'reserved'   : result := ((res.ecx and $10000) = $10000);
+     'PCID'         : result := ((res.ecx and $20000) = $20000);
+     'DCA'          : result := ((res.ecx and $40000) = $40000);
+     'SSE4_1'       : result := ((res.ecx and $80000) = $80000);
+     'SSE4_2'       : result := ((res.ecx and $100000) = $100000);
+     'x2APIC'       : result := ((res.ecx and $200000) = $200000);
+     'MOVBE'        : result := ((res.ecx and $400000) = $400000);
+     'POPCNT'       : result := ((res.ecx and $800000) = $800000);
+     'TSC-DEADLINE' : result := ((res.ecx and $1000000) = $1000000);
+     'AES'          : result := ((res.ecx and $2000000) = $2000000);
+     'XSAVE'        : result := ((res.ecx and $4000000) = $4000000);
+     'OSXSAVE'      : result := ((res.ecx and $8000000) = $8000000);
+     'AVX'          : result := ((res.ecx and $10000000) = $10000000);
+     'F16C'         : result := ((res.ecx and $20000000) = $20000000);
+     'RDRAND'       : result := ((res.ecx and $40000000) = $40000000);
+     //'notused'    : result := ((res.ecx and $80000000) = $80000000);
+
+     'FPU'          : result := ((res.edx and $1) = $1);
+     'VME'          : result := ((res.edx and $2) = $2);
+     'DE'           : result := ((res.edx and $4) = $4);
+     'PSE'          : result := ((res.edx and $8) = $8);
+     'TSC'          : result := ((res.edx and $10) = $10);
+     'MSR'          : result := ((res.edx and $20) = $20);
+     'PAE'          : result := ((res.edx and $40) = $40);
+     'MCE'          : result := ((res.edx and $80) = $80);
+     'CX8'          : result := ((res.edx and $100) = $100);
+     'APIC'         : result := ((res.edx and $200) = $200);
+     //'reserved'   : result := ((res.edx and $400) = $400);
+     'SEP'          : result := ((res.edx and $800) = $800);
+     'MTRR'         : result := ((res.edx and $1000) = $1000);
+     'PGE'          : result := ((res.edx and $2000) = $2000);
+     'MCA'          : result := ((res.edx and $4000) = $4000);
+     'CMOV'         : result := ((res.edx and $8000) = $8000);
+     'PAT'          : result := ((res.edx and $10000) = $10000);
+     'PSE-36'       : result := ((res.edx and $20000) = $20000);
+     'PSN'          : result := ((res.edx and $40000) = $40000);
+     'CLFSH'        : result := ((res.edx and $80000) = $80000);
+     //'reserved'   : result := ((res.edx and $100000) = $100000);
+     'DS'           : result := ((res.edx and $200000) = $200000);
+     'ACPI'         : result := ((res.edx and $400000) = $400000);
+     'MMX'          : result := ((res.edx and $800000) = $800000);
+     'FXSR'         : result := ((res.edx and $1000000) = $1000000);
+     'SSE'          : result := ((res.edx and $2000000) = $2000000);
+     'SSE2'         : result := ((res.edx and $4000000) = $4000000);
+     'SS'           : result := ((res.edx and $8000000) = $8000000);
+     'HTT'          : result := ((res.edx and $10000000) = $10000000);
+     'TM'           : result := ((res.edx and $20000000) = $20000000);
+     //'reserved'   : result := ((res.edx and $40000000) = $40000000);
+     'PBE'          : result := ((res.edx and $80000000) = $80000000);
+  end;
 end;
 
 end.
