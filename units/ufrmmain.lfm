@@ -1,0 +1,59 @@
+object frmMain: TfrmMain
+  Left = 296
+  Height = 240
+  Top = 147
+  Width = 648
+  Caption = 'CPU Identification'
+  ClientHeight = 240
+  ClientWidth = 648
+  OnCreate = FormCreate
+  LCLVersion = '1.6.4.0'
+  object Label1: TLabel
+    Left = 58
+    Height = 17
+    Top = 35
+    Width = 54
+    Caption = 'Vendor:'
+    ParentColor = False
+  end
+  object labelVendorName: TLabel
+    Left = 144
+    Height = 17
+    Top = 35
+    Width = 89
+    Caption = 'vendorName'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 58
+    Height = 17
+    Top = 16
+    Width = 47
+    Caption = 'CPUID:'
+    ParentColor = False
+  end
+  object labelCPUIDSupport: TLabel
+    Left = 144
+    Height = 17
+    Top = 16
+    Width = 102
+    Caption = 'CPUID Support'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 58
+    Height = 17
+    Top = 56
+    Width = 44
+    Caption = 'Name:'
+    ParentColor = False
+  end
+  object labelProcessorName: TLabel
+    Left = 144
+    Height = 17
+    Top = 56
+    Width = 141
+    Caption = 'labelProcessorName'
+    ParentColor = False
+  end
+end

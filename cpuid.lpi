@@ -32,18 +32,27 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="4">
       <Unit0>
         <Filename Value="cpuid.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="frmmain.pas"/>
+        <Filename Value="units/ufrmmain.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form1"/>
+        <ComponentName Value="frmMain"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="frmMain"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="units/cpuinterface.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CpuInterface"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="units/cpu.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Cpu"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -53,6 +62,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="units"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
