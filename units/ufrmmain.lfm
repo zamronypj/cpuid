@@ -56,4 +56,20 @@ object frmMain: TfrmMain
     Caption = 'labelProcessorName'
     ParentColor = False
   end
+  object Family: TLabel
+    Left = 58
+    Height = 17
+    Top = 80
+    Width = 43
+    Caption = 'Family'
+    ParentColor = False
+  end
+  object labelProcessorFamily: TLabel
+    Left = 144
+    Height = 17
+    Top = 80
+    Width = 43
+    Caption = 'Family'
+    ParentColor = False
+  end
 end

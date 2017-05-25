@@ -52,6 +52,10 @@ type
       function cpuidSupported() : boolean;
       function processorName() : string;
       function vendorName() : string;
+      function hasFeature(const feature : string) : boolean;
+      function family() : byte;
+      function model() : byte;
+      function stepping() : byte;
    end;
 
 implementation
@@ -62,6 +66,7 @@ const
    CPUID_BIT = $200000;
 
    CPUID_OPR_BASIC_INFO = 0;
+   CPUID_OPR_VERSION_FEATURE_INFO = 1;
    CPUID_OPR_EXTENDED_INFO = $80000000;
    CPUID_OPR_BRAND_INFO_AVAIL = $80000004;
    CPUID_OPR_BRAND_INFO_0 = $80000002;
@@ -245,12 +250,12 @@ end;
 function TCpu.getCPUBasicInfo() : TCPUBasicInfo;
 var res:TCPUIDResult;
 begin
+   FillByte(result, sizeof(TCPUBasicInfo), 0);
    if not cpuidSupported() then
    begin
       exit;
    end;
 
-   FillByte(result, sizeof(TCPUBasicInfo), 0);
    res := cpuidExec(CPUID_OPR_BASIC_INFO);
    result.operation   := res.eax;
    result.VendorId[0] := res.ebx;
@@ -262,11 +267,11 @@ function TCpu.getCPUExtInfo() : TCPUExtInfo;
 var res:TCPUIDResult;
     br:TCPUBrandString;
 begin
+   FillByte(result, sizeof(TCPUExtInfo), 0);
    if not cpuidSupported() then
    begin
       exit;
    end;
-  FillByte(result, sizeof(TCPUExtInfo), 0);
 
   res := cpuidExec(CPUID_OPR_EXTENDED_INFO);
   result.extOperation := res.eax;
@@ -296,6 +301,45 @@ var basicInfo : TCPUBasicInfo;
 begin
   basicInfo := getCPUBasicInfo();
   result := basicInfo.VendorIdStr;
+end;
+
+function TCpu.hasFeature(const feature: string): boolean;
+begin
+
+  result := false;
+
+end;
+
+const
+   CPUID_VERSION_EXTFAMILY_BIT   = $f00000;
+   CPUID_VERSION_EXTMODEL_BIT    = $0f0000;
+   CPUID_VERSION_PROCTYPE_BIT    = $003000;
+   CPUID_VERSION_FAMILY_BIT      = $000f00;
+   CPUID_VERSION_MODEL_BIT       = $0000f0;
+   CPUID_VERSION_STEPPING_BIT    = $00000f;
+
+function TCpu.family() : byte;
+var res:TCPUIDResult;
+    familyValue, extFamilyValue : byte;
+begin
+  res := cpuidExec(CPUID_OPR_VERSION_FEATURE_INFO);
+  familyValue := (res.eax and CPUID_VERSION_FAMILY_BIT) shr 8;
+  result := familyValue;
+  if (familyValue = $0f) then
+  begin
+    extFamilyValue := (res.eax and CPUID_VERSION_EXTFAMILY_BIT) shr 20;
+    result := extFamilyValue + familyValue;
+  end;
+end;
+
+function TCpu.model(): byte;
+begin
+  result := 0;
+end;
+
+function TCpu.stepping(): byte;
+begin
+  result := 0;
 end;
 
 end.

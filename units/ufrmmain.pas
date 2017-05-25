@@ -15,6 +15,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Family: TLabel;
+    labelProcessorFamily: TLabel;
     labelProcessorName: TLabel;
     labelCPUIDSupport: TLabel;
     labelVendorName: TLabel;
@@ -46,6 +48,7 @@ begin
   end;
   labelVendorName.Caption := processor.vendorName();
   labelProcessorName.Caption := processor.processorName();
+  labelProcessorFamily.Caption := inttoStr(processor.family());
 end;
 
 end.
