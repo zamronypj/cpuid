@@ -12,10 +12,14 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Family: TLabel;
+    labelStepping: TLabel;
+    labelProcessorStepping: TLabel;
+    labelVendor: TLabel;
+    labelCpuid: TLabel;
+    labelName: TLabel;
+    labelFamily: TLabel;
+    labelModel: TLabel;
+    labelProcessorModel: TLabel;
     labelProcessorFamily: TLabel;
     labelProcessorName: TLabel;
     labelCPUIDSupport: TLabel;
@@ -49,6 +53,8 @@ begin
   labelVendorName.Caption := processor.vendorName();
   labelProcessorName.Caption := processor.processorName();
   labelProcessorFamily.Caption := inttoStr(processor.family());
+  labelProcessorModel.Caption := inttoStr(processor.model());
+  labelProcessorStepping.Caption := inttoStr(processor.stepping());
 end;
 
 end.

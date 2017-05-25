@@ -333,13 +333,25 @@ begin
 end;
 
 function TCpu.model(): byte;
+var res:TCPUIDResult;
+    modelValue, familyValue, extModelValue : byte;
 begin
-  result := 0;
+  res := cpuidExec(CPUID_OPR_VERSION_FEATURE_INFO);
+  modelValue := (res.eax and CPUID_VERSION_MODEL_BIT) shr 4;
+  familyValue := (res.eax and CPUID_VERSION_FAMILY_BIT) shr 8;
+  result := modelValue;
+  if ((familyValue = $06) or (familyValue = $0f)) then
+  begin
+    extModelValue := (res.eax and CPUID_VERSION_EXTMODEL_BIT) shr 16;
+    result := (extModelValue shl 4) + modelValue;
+  end;
 end;
 
 function TCpu.stepping(): byte;
+var res:TCPUIDResult;
 begin
-  result := 0;
+  res := cpuidExec(CPUID_OPR_VERSION_FEATURE_INFO);
+  result := res.eax and CPUID_VERSION_STEPPING_BIT;
 end;
 
 end.

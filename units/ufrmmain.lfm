@@ -8,10 +8,10 @@ object frmMain: TfrmMain
   ClientWidth = 648
   OnCreate = FormCreate
   LCLVersion = '1.6.4.0'
-  object Label1: TLabel
+  object labelVendor: TLabel
     Left = 58
     Height = 17
-    Top = 35
+    Top = 36
     Width = 54
     Caption = 'Vendor:'
     ParentColor = False
@@ -19,12 +19,12 @@ object frmMain: TfrmMain
   object labelVendorName: TLabel
     Left = 144
     Height = 17
-    Top = 35
+    Top = 36
     Width = 89
     Caption = 'vendorName'
     ParentColor = False
   end
-  object Label2: TLabel
+  object labelCpuid: TLabel
     Left = 58
     Height = 17
     Top = 16
@@ -40,7 +40,7 @@ object frmMain: TfrmMain
     Caption = 'CPUID Support'
     ParentColor = False
   end
-  object Label3: TLabel
+  object labelName: TLabel
     Left = 58
     Height = 17
     Top = 56
@@ -56,20 +56,52 @@ object frmMain: TfrmMain
     Caption = 'labelProcessorName'
     ParentColor = False
   end
-  object Family: TLabel
+  object labelFamily: TLabel
     Left = 58
     Height = 17
-    Top = 80
-    Width = 43
-    Caption = 'Family'
+    Top = 76
+    Width = 47
+    Caption = 'Family:'
     ParentColor = False
   end
   object labelProcessorFamily: TLabel
     Left = 144
     Height = 17
-    Top = 80
+    Top = 76
     Width = 43
     Caption = 'Family'
+    ParentColor = False
+  end
+  object labelModel: TLabel
+    Left = 58
+    Height = 17
+    Top = 96
+    Width = 47
+    Caption = 'Model:'
+    ParentColor = False
+  end
+  object labelProcessorModel: TLabel
+    Left = 144
+    Height = 17
+    Top = 96
+    Width = 144
+    Caption = 'labelProcessorModel'
+    ParentColor = False
+  end
+  object labelStepping: TLabel
+    Left = 58
+    Height = 17
+    Top = 116
+    Width = 66
+    Caption = 'Stepping:'
+    ParentColor = False
+  end
+  object labelProcessorStepping: TLabel
+    Left = 144
+    Height = 17
+    Top = 116
+    Width = 163
+    Caption = 'labelProcessorStepping'
     ParentColor = False
   end
 end
