@@ -1,3 +1,13 @@
+{-----------------------------------
+ Cpu Identifier interface declaration
+-------------------------------------
+ Interface that encapsulate detail of
+ getting processor vendor  name, brand string
+ supported features and etc
+-------------------------------------
+(c) 2017 Zamrony P. Juhara <zamronypj@yahoo.com>
+http://github.com/zamronypj/cpuid
+-------------------------------------}
 unit CpuInterface;
 
 {$mode objfpc}{$H+}

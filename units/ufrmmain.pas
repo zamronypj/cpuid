@@ -1,3 +1,13 @@
+{-----------------------------------
+ Main window of application
+-------------------------------------
+ Simple form that display processor
+ basic information such as vendor name,
+ brand string, and supported features
+-------------------------------------
+(c) 2017 Zamrony P. Juhara <zamronypj@yahoo.com>
+http://github.com/zamronypj/cpuid
+-------------------------------------}
 unit ufrmmain;
 
 {$mode objfpc}{$H+}
