@@ -9,14 +9,18 @@ uses
 
 type
 
-   ICPU = interface
-      function cpuidSupported() : boolean;
-      function vendorName() : string;
-      function processorName() : string;
-      function family() : byte;
-      function model() : byte;
-      function stepping() : byte;
-      function hasFeature(const feature : string) : boolean;
+   ICpuIdentifier = interface
+       function cpuidSupported() : boolean;
+       function vendorName() : string;
+       function processorName() : string;
+       function family() : byte;
+       function model() : byte;
+       function stepping() : byte;
+       function hasFeature(const feature : string) : boolean;
+
+       function maximumFrequency() : word;
+       function baseFrequency() : word;
+       function busReferenceFrequency() : word;
    end;
 
 implementation

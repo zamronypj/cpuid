@@ -12,6 +12,8 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    labelFrequency: TLabel;
+    labelProcessorFrequency: TLabel;
     labelFeatures: TLabel;
     labelProcessorFeatures: TLabel;
     labelStepping: TLabel;
@@ -28,11 +30,9 @@ type
     labelVendorName: TLabel;
     procedure FormCreate(Sender: TObject);
   private
-    { private declarations }
-    function supportedFeature(const cpuIntf : ICPU; const feature: string) : string;
-    function reportAllSupportedFeatures(const cpuIntf : ICPU) : string;
+    function supportedFeature(const cpuIntf : ICpuIdentifier; const feature: string) : string;
+    function reportAllSupportedFeatures(const cpuIntf : ICpuIdentifier) : string;
   public
-    { public declarations }
   end;
 
 var
@@ -46,36 +46,40 @@ uses cpu;
 { TfrmMain }
 
 procedure TfrmMain.FormCreate(Sender: TObject);
-var processor : ICPU;
+var processor : ICpuIdentifier;
 begin
-  processor := TCpu.Create();
-  labelCPUIDSupport.Caption:= 'not supported';
-  if (processor.cpuidSupported()) then
-  begin
-    labelCPUIDSupport.Caption:= 'supported';
-  end;
-  labelVendorName.Caption := processor.vendorName();
-  labelProcessorName.Caption := processor.processorName();
-  labelProcessorFamily.Caption := inttoStr(processor.family());
-  labelProcessorModel.Caption := inttoStr(processor.model());
-  labelProcessorStepping.Caption := inttoStr(processor.stepping());
-  labelProcessorFeatures.Caption := reportAllSupportedFeatures(processor);
+   processor := TCpuIdentifier.Create();
+   labelCPUIDSupport.Caption:= 'not supported';
+   if (processor.cpuidSupported()) then
+   begin
+      labelCPUIDSupport.Caption:= 'supported';
+   end;
+   labelVendorName.Caption := processor.vendorName();
+   labelProcessorName.Caption := processor.processorName();
+   labelProcessorFamily.Caption := inttoStr(processor.family());
+   labelProcessorModel.Caption := inttoStr(processor.model());
+   labelProcessorStepping.Caption := inttoStr(processor.stepping());
+   labelProcessorFeatures.Caption := reportAllSupportedFeatures(processor);
+   labelProcessorFrequency.Caption := format('%d Mhz', [processor.baseFrequency()]);
 end;
 
 {**
  * Return feature string if it is supported
  *}
-function TfrmMain.supportedFeature(const cpuIntf: ICPU; const feature: string): string;
+function TfrmMain.supportedFeature(const cpuIntf: ICpuIdentifier; const feature: string): string;
 begin
-  result := '';
-  if (cpuIntf.hasFeature(feature)) then
-  begin
-    result := feature;
-  end;
+   result := '';
+   if (cpuIntf.hasFeature(feature)) then
+   begin
+      result := feature;
+   end;
 end;
 
-function TfrmMain.reportAllSupportedFeatures(const cpuIntf: ICPU): string;
-var features : array [0..58] of string = (
+function TfrmMain.reportAllSupportedFeatures(const cpuIntf: ICpuIdentifier): string;
+const
+   startFeatureIndex = 0;
+   endFeatureIndex = 58;
+var features : array [startFeatureIndex..endFeatureIndex] of string = (
       'SSE3', 'PCLMULQDQ', 'DTES64', 'MONITOR', 'DS-CPL', 'VMX',
       'SMX', 'EIST', 'TM2', 'SSSE3', 'CNXT-ID', 'SDBG', 'FMA',
       'CMPXCHG16B', 'xTPR', 'PDCM', 'PCID', 'DCA', 'SSE4_1',
@@ -90,15 +94,15 @@ var features : array [0..58] of string = (
     i:integer;
     tmp:string;
 begin
-  result:='';
-  for i := 0 to 57 do
-  begin
-    tmp:= supportedFeature(cpuIntf, features[i]);
-    if (length(tmp) > 0) then
-    begin
-      result:= result + tmp + ' ';
-    end;
-  end;
+   result:='';
+   for i := startFeatureIndex to endFeatureIndex do
+   begin
+      tmp:= supportedFeature(cpuIntf, features[i]);
+      if (length(tmp) > 0) then
+      begin
+         result:= result + tmp + ' ';
+      end;
+   end;
 end;
 
 end.
