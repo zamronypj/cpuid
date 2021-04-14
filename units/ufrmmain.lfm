@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 2052
+  Left = 415
   Height = 451
-  Top = 150
+  Top = 195
   Width = 613
   Caption = 'CPU Identification'
   ClientHeight = 451
