@@ -266,7 +266,7 @@ end;
 function TCpuIdentifier.getCPUBasicInfo() : TCPUBasicInfo;
 var res:TCPUIDResult;
 begin
-    FillByte(result, sizeof(TCPUBasicInfo), 0);
+    result := Default(TCPUBasicInfo);
     if not cpuidSupported() then
     begin
        exit;
@@ -283,7 +283,7 @@ function TCpuIdentifier.getCPUExtInfo() : TCPUExtInfo;
 var res:TCPUIDResult;
     br:TCPUBrandString;
 begin
-    FillByte(result, sizeof(TCPUExtInfo), 0);
+    result := Default(TCPUExtInfo);
     if not cpuidSupported() then
     begin
         exit;
