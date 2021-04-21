@@ -399,7 +399,7 @@ begin
        'SMX'          : result := ((res.ecx and $40) = $40);
        'EIST'         : result := ((res.ecx and $80) = $80);
        'TM2'          : result := ((res.ecx and $100) = $100);
-       'SSSE3'         : result := ((res.ecx and $200) = $200);
+       'SSSE3'        : result := ((res.ecx and $200) = $200);
        'CNXT-ID'      : result := ((res.ecx and $400) = $400);
        'SDBG'         : result := ((res.ecx and $800) = $800);
        'FMA'          : result := ((res.ecx and $1000) = $1000);
